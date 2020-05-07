@@ -86,13 +86,13 @@
       <!--rowspan:縦結合、colspan：横結合-->
       <tr>
         <td colspan="2">累計日数</td>
-        <td colspan="5">総合勤務時間</td>
-        <td colspan="2">累計在社時間</td>
+        <td colspan="6">総合勤務時間</td>
+        <td colspan="3">累計在社時間</td>
       </tr>
       <tr>
         <td colspan="2"><%= @attendances.count %></td>
-        <td colspan="5"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
-        <td colspan="2"><%= format("%.2f", @total_working_times.to_f) %></td>
+        <td colspan="6"><%= format_basic_info(@user.work_time).to_f * @worked_sum %></td>
+        <td colspan="3"><%= format("%.2f", @total_working_times.to_f) %></td>
       </tr>
     </tfoot>    
   </table>
