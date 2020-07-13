@@ -1,13 +1,13 @@
 <% provide(:title, 'All Users') %>
   <% if params[:search].blank? %>
-    <h1>全てのユーザ一</h1>
+    <h1>全てのスタッフ</h1>
   <% else %>
     <h1>検索結果</h1>
   <% end %>
 
 <div class="row container">
   <div class="col-md-4 col-md-offset-8">
-    <p>ユーザ名検索</p>
+    <p>スタッフ名検索</p>
     <%= form_tag(users_path, :method => 'get' ) do %>
       <%= text_field_tag :search %>
       <%= submit_tag '検索', :name => nil, class: "btn btn-primary" %>

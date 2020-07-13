@@ -31,9 +31,11 @@
       <tr>
         <th rowspan="2">日付</th>
         <th rowspan="2">曜日</th>
-        <th colspan="3">出社</th>
-        <th colspan="3">退社</th>
+        <th colspan="3">出勤</th>
+        <th colspan="3">退勤</th>
         <th rowspan="2">在社時間</th>
+        <th colspan="3">出勤</th>
+        <th colspan="3">退勤</th>
         <th rowspan="2">備考</th>
       </tr>
       <tr>
@@ -42,6 +44,13 @@
         <th></th>
         <th>時</th>
         <th>分</th>
+        <th></th>
+        <th>時</th>
+        <th>分</th>
+        <th></th>
+        <th>時</th>
+        <th>分</th>
+        <th></th>
       </tr>
     </thead>
 
@@ -77,6 +86,20 @@
             <% if day.started_at.present? && day.finished_at.present? %>
               <%= str_times = working_times(day.started_at.floor_to(15.minutes) , day.finished_at.floor_to(15.minutes)) %>
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
+            <% end %>
+          </td>
+          <td><%= format_hour(day.started_at) if day.started_at.present? %></td>
+          <td><%= format_min(day.started_at) if day.started_at.present? %></td>
+          <td>
+            <% if (btn_text = attendance_state(day)) && day.started_at.nil? %>
+              <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+            <% end %>
+          </td>
+          <td><%= format_hour(day.finished_at) if day.finished_at.present? %></td>
+          <td><%= format_min(day.finished_at) if day.finished_at.present? %></td>
+          <td>
+            <% if (btn_text = attendance_state(day)) && day.started_at.present? && day.finished_at.nil? %>
+              <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
           <td><%= day.note %></td>
