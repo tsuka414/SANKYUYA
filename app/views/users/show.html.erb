@@ -6,7 +6,7 @@
         <%= link_to "1ヶ月の勤怠編集へ", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %>
       </td>
       <td>
-        <%= link_to "CSV出力", user_path(@user, format: :csv), class: "btn btn-primary" %>
+        <%= link_to "勤怠出力", user_path(@user, format: :csv), class: "btn btn-primary" %>
       </td>
       <td>
         <%= link_to "⇦", user_path(date: @first_day.prev_month), class: "btn btn-primary" %>
@@ -22,8 +22,8 @@
         <%= @worked_sum %>日
       </td>
       <td>
-        月初日：<%= l(@first_day, format: :short) %><br>
-        月末日：<%= l(@last_day, format: :short) %>
+        開始日：<%= l(@start_day, format: :short) %><br>
+        締め日：<%= l(@end_day, format: :short) %>
       </td>
     </tr>
   </table>
@@ -109,11 +109,13 @@
           </td>
           <td>
             <% if day.second_started_at.present? && day.second_finished_at.present? %>
-              <%= str_times = working_times(day.started_at.floor_to(15.minutes) , day.finished_at.floor_to(15.minutes)) %>
+              <%= str_times = working_times(day.second_started_at.floor_to(15.minutes) , day.second_finished_at.floor_to(15.minutes)) %>
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
             <% end %>
           </td>
-          <td></td>
+          <td>
+            <%= day.note %>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -4,6 +4,8 @@ module AttendancesHelper
     if Date.current == attendance.worked_on
       return '出勤' if attendance.started_at.nil?
       return '退勤' if attendance.started_at.present? && attendance.finished_at.nil?
+      return '出勤' if attendance.finished_at.present? && attendance.second_started_at.nil?
+      return '退勤' if attendance.second_started_at.present? && attendance.second_finished_at.nil?
     end
     return false
   end
