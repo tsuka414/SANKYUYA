@@ -34,7 +34,8 @@ class ApplicationController < ActionController::Base
   def set_one_month 
     @first_day = params[:date].nil? ?
     Date.current.beginning_of_month : params[:date].to_date
-    @last_day = @first_day.end_of_month
+    @first_day = @first_day.change(day: 16)
+    @last_day = @first_day.next_month.change(day: 15)
     one_month = [*@first_day..@last_day] # 対象の月の日数を代入します。
     # ユーザーに紐付く一ヶ月分のレコードを検索し取得します。
     @attendances = @user.attendances.where(worked_on: @first_day..@last_day).order(:worked_on)
