@@ -7,9 +7,12 @@
         <tr>
           <th>日付</th>
           <th>曜日</th>
-          <th>出勤時間</th>
-          <th>退勤時間</th>
-          <th>在社時間</th>
+          <th>出勤時間(1)</th>
+          <th>退勤時間(1)</th>
+          <th>在社時間(1)</th>
+          <th>出勤時間(2)</th>
+          <th>退勤時間(2)</th>
+          <th>在社時間(2)</th>
           <th>備考</th>
         </tr>
       </thead>
@@ -37,6 +40,18 @@
               <td>
                 <% if day.started_at.present? && day.finished_at.present? %>
                   <%= working_times(day.started_at, day.finished_at) %>
+                <% end %>
+              </td>
+              <% if Date.current < day.worked_on %>
+                <td><%= attendance.time_field :second_started_at, readonly: true, class: "form-control" %></td>
+                <td><%= attendance.time_field :second_finished_at, readonly: true, class: "form-control" %></td>
+              <% else %>
+                <td><%= attendance.time_field :second_started_at, class: "form-control" %></td>
+                <td><%= attendance.time_field :second_finished_at, class: "form-control" %></td>
+              <% end %>
+              <td>
+                <% if day.second_started_at.present? && day.second_finished_at.present? %>
+                  <%= working_times(day.second_started_at, day.second_finished_at) %>
                 <% end %>
               </td>
               <td><%= attendance.text_field :note, class: "form-control" %></td>
