@@ -44,9 +44,9 @@ class AttendancesController < ApplicationController
    begin
     error = []
       attendances_params.each do |id, item|
-        if item[:started_at].present?  && !item[:finished_at].present?
+        if item[:started_at].present?  && !item[:finished_at].present? && item[:note].blank?
           error << "error"
-        elsif !item[:started_at].present?  && item[:finished_at].present?
+        elsif !item[:started_at].present?  && item[:finished_at].present? && item[:note].blank?
           error << "error"
         end
       end
@@ -65,7 +65,7 @@ class AttendancesController < ApplicationController
   
   private
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :finished_at, :note])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :finished_at, :second_started_at, :second_finished_at, :note])[:attendances]
     end
     
     def admin_or_correct_user

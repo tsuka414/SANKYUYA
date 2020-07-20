@@ -11,8 +11,8 @@ class UsersController < ApplicationController
 
   def show
     @worked_sum = @attendances.where.not(started_at: nil).count
-    @start_day = Date.current
-    @end_day = Date.current
+    # @start_day = Date.current.beginning_of_month.change(day: 16)
+    # @end_day = @start_day.next_month.change(day: 15)
   end
 
   def new

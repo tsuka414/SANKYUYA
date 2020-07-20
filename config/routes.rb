@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
   get '/signup', to: 'users#new'
+  post '/callback' => 'linebot#callback'  
 
   # ログイン機能
   get    '/login', to: 'sessions#new'
