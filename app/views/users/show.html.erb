@@ -2,12 +2,14 @@
 <div>
   <table class="table table-bordered table-condensed user-table">
     <tr>
-      <td>
-        <%= link_to "1ヶ月の勤怠編集へ", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %>
-      </td>
-      <td>
-        <%= link_to "勤怠出力", user_path(@user, format: :csv), class: "btn btn-primary" %>
-      </td>
+      <% if (logged_in? && current_user.admin?) %>
+        <td>
+          <%= link_to "1ヶ月の勤怠編集へ", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-success" %>
+        </td>
+        <td>
+          <%= link_to "勤怠出力", user_path(@user, format: :csv), class: "btn btn-primary" %>
+        </td>
+      <% end %>
       <td>
         <%= link_to "⇦", user_path(date: @first_day.prev_month), class: "btn btn-primary" %>
         【<%= l(@first_day, format: :middle) %>】勤怠管理表
@@ -26,7 +28,11 @@
       <!--  締め日：%= l(@end_day, format: :short) %>-->
       <!--</td>-->
     </tr>
+    
   </table>
+  <!--<td>-->
+  <!--  %= link_to 'Excel出力', products_path(@user, format: :xlsx), class: 'btn btn-primary' %>-->
+  <!--</td>-->
 </div>
 
 <div>
@@ -89,7 +95,7 @@
           </td>
           <td>
             <% if day.started_at.present? && day.finished_at.present? %>
-              <%= str_times = working_times(day.started_at.floor_to(15.minutes) , day.finished_at.floor_to(15.minutes)) %>
+              <%= str_times = working_times(day.started_at, day.finished_at) %>
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
             <% end %>
           </td>
@@ -109,7 +115,7 @@
           </td>
           <td>
             <% if day.second_started_at.present? && day.second_finished_at.present? %>
-              <%= str_times = working_times(day.second_started_at.floor_to(15.minutes) , day.second_finished_at.floor_to(15.minutes)) %>
+              <%= str_times = working_times(day.second_started_at, day.second_finished_at) %>
               <% @total_working_times = @total_working_times.to_f + str_times.to_f %>
             <% end %>
           </td>
