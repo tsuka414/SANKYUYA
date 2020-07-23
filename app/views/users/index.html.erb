@@ -1,4 +1,5 @@
 <% provide(:title, 'All Users') %>
+<div class="container">
   <% if params[:search].blank? %>
     <h1>全てのスタッフ</h1>
   <% else %>
@@ -17,7 +18,7 @@
 
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
-  <table class="table table-condensed table-hover" id="table-users">
+  <table class="table table-condensed table-hover container" id="table-users">
     <thead>
       <tr>
         <th><%= User.human_attribute_name :name %></th>
@@ -45,6 +46,7 @@
     <% end %>
   </table>
   <%= will_paginate %>
+</div>
 </div>
 
 <div id="edit-basic-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

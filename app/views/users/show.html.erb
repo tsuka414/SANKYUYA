@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<div>
+<div class="container">
   <table class="table table-bordered table-condensed user-table">
     <tr>
       <% if (logged_in? && current_user.admin?) %>
@@ -35,7 +35,7 @@
   <!--</td>-->
 </div>
 
-<div>
+<div class="container">
   <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
       <tr>
