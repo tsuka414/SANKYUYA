@@ -18,6 +18,7 @@ gem 'jbuilder',     '~> 2.5'
 gem 'line-bot-api'
 gem 'dotenv-rails'
 gem 'rubyXL'
+gem 'mini_racer', platforms: :ruby
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
