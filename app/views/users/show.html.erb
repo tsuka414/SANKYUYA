@@ -23,16 +23,9 @@
         出勤日数<br>
         <%= @worked_sum %>日
       </td>
-      <!--<td>-->
-      <!--  開始日：%= l(@start_day, format: :short) %><br>-->
-      <!--  締め日：%= l(@end_day, format: :short) %>-->
-      <!--</td>-->
     </tr>
     
   </table>
-  <!--<td>-->
-  <!--  %= link_to 'Excel出力', products_path(@user, format: :xlsx), class: 'btn btn-primary' %>-->
-  <!--</td>-->
 </div>
 
 <div class="container">
@@ -83,14 +76,14 @@
           <td><%= day.started_at.min if day.started_at.present? %></td>
           <td>
             <% if (btn_text = attendance_state(day)) && day.started_at.nil? %>
-              <%= link_to "#{btn_text}(1)", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
           <td><%= day.finished_at.hour if day.finished_at.present? %></td>
           <td><%= day.finished_at.min if day.finished_at.present? %></td>
           <td>
             <% if (btn_text = attendance_state(day)) && day.started_at.present? && day.finished_at.nil? %>
-              <%= link_to "#{btn_text}(1)", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
           <td>
@@ -103,14 +96,14 @@
           <td><%= day.second_started_at.min if day.second_started_at.present? %></td>
           <td>
             <% if (btn_text = attendance_state(day)) && (day.finished_at.present? && day.second_started_at.nil?) %>
-              <%= link_to "#{btn_text}(2)", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
           <td><%= day.second_finished_at.hour if day.second_finished_at.present? %></td>
           <td><%= day.second_finished_at.min if day.second_finished_at.present? %></td>
           <td>
             <% if (btn_text = attendance_state(day)) && day.second_started_at.present? && day.second_finished_at.nil? %>
-              <%= link_to "#{btn_text}(2)", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+              <%= link_to "#{btn_text}", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
             <% end %>
           </td>
           <td>
