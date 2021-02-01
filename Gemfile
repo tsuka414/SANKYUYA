@@ -21,6 +21,7 @@ gem 'rubyXL'
 gem 'mini_racer', platforms: :ruby
 
 group :development, :test do
+  gem 'rspec-rails', '4.0.2'
   gem 'sqlite3', '1.3.13'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
