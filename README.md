@@ -1,10 +1,8 @@
-#ポートフォリオを作成しよう！
-
-やってやるぜ〜
+#ポートフォリオ
 
 ## 開発環境
 
-* AWS Cloud9
+* VScode
 * Ruby
 * Rails
 * Git(change from HTTPS to SSH)
