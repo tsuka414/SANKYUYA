@@ -22,6 +22,7 @@ gem 'mini_racer', platforms: :ruby
 
 group :development, :test do
   gem 'rspec-rails', '4.0.2'
+  gem 'factory_bot_rails'
   gem 'sqlite3', '1.3.13'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -31,6 +32,13 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'capybara',  '~> 2.15.2'
+  gem 'launchy', '~> 2.4.3'
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :production do
