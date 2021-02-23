@@ -1,15 +1,60 @@
-version: 2.1
-orbs:
-  ruby: circleci/ruby@0.1.2 
-
+# Ruby CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+# jobsの中にタスクを定義。一番下のworkflowのjobsのなかで定義したタスクを使う。
 jobs:
+  # buildという名前のタスク定義
   build:
+
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+      # specify the version you desire here
+      - image: circleci/ruby:2.7.2-node-browsers 
+
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/repo
+
+    # 実際の処理内容
     steps:
       - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      # runのたびに実行
       - run:
-          name: Which bundler?
-          command: bundle -v
-      - ruby/bundle-install
+          name: install dependencies
+          command: |
+            gem install bundler -v 2.2.6
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # run tests
+      - run:
+          name: Parallel RSpec
+          command: |
+            bundle exec rspec --format RspecJunitFormatter \
+            --out test_results/rspec.xml \
+            --format documentation
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
