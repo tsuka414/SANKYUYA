@@ -1,4 +1,7 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '2.7.2'
 
 gem 'rails',        '~> 5.1.6'
 gem 'rails-i18n'
@@ -22,6 +25,7 @@ gem 'mini_racer', platforms: :ruby
 
 group :development, :test do
   gem 'rspec-rails', '4.0.2'
+  gem 'rubocop'
   gem 'factory_bot_rails'
   gem 'sqlite3', '1.3.13'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
