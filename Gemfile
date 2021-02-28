@@ -43,6 +43,8 @@ group :test do
   gem 'launchy', '~> 2.4.3'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
 end
 
 group :production do
