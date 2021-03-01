@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-gem 'rails',        '~> 5.1.6'
+gem 'rails', '~> 5.2.4'
 gem 'rails-i18n'
 gem 'bcrypt'
 gem 'rounding'
