@@ -39,7 +39,7 @@
               <% end %>
               <td>
                 <% if day.started_at.present? && day.finished_at.present? %>
-                  <%= working_times(day.started_at, day.finished_at) %>
+                  <%= working_times(day.started_at.floor_to(15.minutes) , day.finished_at.floor_to(15.minutes)) %>
                 <% end %>
               </td>
               <% if Date.current < day.worked_on %>
@@ -51,7 +51,7 @@
               <% end %>
               <td>
                 <% if day.second_started_at.present? && day.second_finished_at.present? %>
-                  <%= working_times(day.second_started_at, day.second_finished_at) %>
+                  <%= working_times(day.second_started_at.floor_to(15.minutes) , day.second_finished_at.floor_to(15.minutes)) %>
                 <% end %>
               </td>
               <td><%= attendance.text_field :note, class: "form-control" %></td>

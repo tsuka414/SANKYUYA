@@ -22,6 +22,7 @@ gem 'line-bot-api'
 gem 'dotenv-rails'
 gem 'rubyXL'
 gem 'mini_racer', platforms: :ruby
+gem 'rounding'
 
 group :development, :test do
   gem 'rspec-rails', '4.0.2'
